@@ -1,0 +1,20 @@
+{
+    "name": "vendor/project",
+    "description": "Amazing project",
+    "type": "project",
+    "license": "WTFPL",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "John Doe",
+            "email": "XXXXXXXX+JohnDoe@users.noreply.github.com",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
