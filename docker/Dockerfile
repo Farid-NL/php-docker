@@ -1,19 +1,26 @@
 FROM php:8.2.12-apache
 
+# Arguments for creating a non-root user
 ARG UID
 ARG APP_USER
 ARG GID
 ARG APP_GROUP
+
+# Frontend for automatic installs
 ARG DEBIAN_FRONTEND=noninteractive
+
+# Versions of other software
 ARG NODE_VERSION=20
 ARG POSTGRES_VERSION=15
-ARG A_DOCUMENT_ROOT
 
-# Default path for Document Root: /var/www/html
+# Argument to change the default document root of Apache
+ARG A_DOCUMENT_ROOT
+# Default: /var/www/html
 ENV DOCUMENT_ROOT=$A_DOCUMENT_ROOT
 
 WORKDIR /var/www/html
 
+# Script to facilitate the installation of php extensions
 ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
 COPY config/settings.ini /usr/local/etc/php/conf.d/settings.ini
