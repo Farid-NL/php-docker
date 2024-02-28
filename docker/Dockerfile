@@ -34,3 +34,4 @@ RUN mkdir -p /etc/apt/keyrings \
     && a2enmod rewrite
 
 COPY config/settings.ini /usr/local/etc/php/conf.d/settings.ini
+#COPY config/settings.conf /etc/apache2/conf-enabled/settings.conf
