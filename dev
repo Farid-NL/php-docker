@@ -194,6 +194,22 @@ elif [ "$1" == "root-shell" ] || [ "$1" == "root-bash" ]; then
     [ ! -t 0 ] && ARGS+=(-T)
     ARGS+=("$APP_SERVICE" bash "$@")
 
+# Execute a command within the application container...
+elif [ "$1" == "exec" ]; then
+    shift 1
+
+    ARGS+=(exec -u dev)
+    [ ! -t 0 ] && ARGS+=(-T)
+    ARGS+=("$APP_SERVICE" "$@")
+
+# Execute a root user command within the application container...
+elif [ "$1" == "exec-root" ]; then
+    shift 1
+
+    ARGS+=(exec -u root)
+    [ ! -t 0 ] && ARGS+=(-T)
+    ARGS+=("$APP_SERVICE" "$@")
+
 # Pass unknown commands to the "docker-compose" binary...
 else
     ARGS+=("$@")
