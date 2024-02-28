@@ -16,6 +16,10 @@ WORKDIR /var/www/html
 
 ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
+COPY config/settings.ini /usr/local/etc/php/conf.d/settings.ini
+#COPY config/settings.conf /etc/apache2/conf-available/settings.conf
+#COPY config/vh.conf /etc/apache2/sites-available/vh.conf
+
 RUN mkdir -p /etc/apt/keyrings \
     && apt-get update \
     && apt-get install -y gnupg curl ca-certificates zip unzip git \
@@ -36,10 +40,11 @@ RUN mkdir -p /etc/apt/keyrings \
     && groupadd --force -g "$GID" "$APP_GROUP" \
     && useradd -ms /bin/bash --no-user-group -g "$GID" -u "$UID" "$APP_USER" \
     && a2enmod rewrite \
+#    && a2enconf settings.conf \
+#    && a2ensite vh.conf \
     && if [ -n "$DOCUMENT_ROOT" ] && [ "$DOCUMENT_ROOT" != "/var/www/html" ]; then \
            sed -ri -e "s!/var/www/html!${DOCUMENT_ROOT}!g" /etc/apache2/sites-available/*.conf; \
            sed -ri -e "s!/var/www/!${DOCUMENT_ROOT}!g" /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf; \
        fi
 
-COPY config/settings.ini /usr/local/etc/php/conf.d/settings.ini
-#COPY config/settings.conf /etc/apache2/conf-enabled/settings.conf
+#USER dev
