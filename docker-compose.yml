@@ -8,6 +8,7 @@ services:
                 APP_USER: '${APP_USER:-dev}'
                 GID: '${GID:-1000}'
                 APP_GROUP: '${APP_GROUP:-dev}'
+                A_DOCUMENT_ROOT: '${DOCUMENT_ROOT:-/var/www/html}'
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:
