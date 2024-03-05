@@ -65,7 +65,7 @@ Follow the instructions of your OS
     docker compose up -d
     ```
 
-You can commands inside the container with the help of `dev` script
+You can run commands inside the container with the help of `dev` script
 
 ```shell
 # Show help message with command examples 
@@ -75,3 +75,8 @@ You can commands inside the container with the help of `dev` script
 ./dev composer install
 ```
 
+## TODOs
+
+- [ ] Explain how to add (modify) php and apache configurations
+- [ ] Add a gif/video demo
+- [ ] Make another branch for just apache + php skeleton
