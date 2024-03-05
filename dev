@@ -49,8 +49,7 @@ function display_help {
     echo "${YELLOW}Database Commands:${NC}"
     echo "  ${GREEN}dev mysql${NC}     Start a MySQL CLI session within the 'mysql' container"
     echo "  ${GREEN}dev mariadb${NC}   Start a MySQL CLI session within the 'mariadb' container"
-    echo "  ${GREEN}dev psql${NC}      Start a PostgreSQL CLI session within the 'pgsql' container"
-    echo "  ${GREEN}dev redis${NC}     Start a Redis CLI session within the 'redis' container"
+    echo "  ${GREEN}dev psql${NC}      Start a PostgresSQL CLI session within the 'pgsql' container"
     echo
     echo "${YELLOW}Container CLI:${NC}"
     echo "  ${GREEN}dev shell${NC}        Start a shell session within the application container"
@@ -65,7 +64,7 @@ function display_help {
     echo "${YELLOW}Customization:${NC}"
     echo "  ${GREEN}dev build --no-cache${NC}       Rebuild all containers"
 
-    exit 1
+    exit 0
 }
 
 # Proxy the "help" command...
@@ -83,8 +82,8 @@ if [ -f ./.env ]; then
 fi
 
 
-#export APP_USER=${WWWUSER:-$UID}
-#export APP_GROUP=${WWWGROUP:-$(id -g)}
+#export APP_USER=${APP_USER:-$UID}
+#export APP_GROUP=${APP_GROUP:-$(id -g)}
 export APP_SERVICE=${APP_SERVICE:-"php.app"}
 
 # Define Docker Compose command prefix...
@@ -169,7 +168,7 @@ elif [ "$1" == "mariadb" ]; then
     ARGS+=(mariadb bash -c)
     ARGS+=("MYSQL_PWD=\${MYSQL_PASSWORD} mysql -u \${MYSQL_USER} \${MYSQL_DATABASE}")
 
-# Initiate a PostgreSQL CLI terminal session within the "pgsql" container...
+# Initiate a PostgresSQL CLI terminal session within the "pgsql" container...
 elif [ "$1" == "psql" ]; then
     shift 1
 
